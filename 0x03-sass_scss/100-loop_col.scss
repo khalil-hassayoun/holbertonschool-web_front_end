@@ -1,0 +1,4 @@
+/* classes with different width */
+@for $i from 1 through 4 {
+  .col-#{$i} { width: (100% / $i) ; }
+}

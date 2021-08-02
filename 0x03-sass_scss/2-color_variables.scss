@@ -1,0 +1,9 @@
+/* A Sass file that uses 2 variables */
+$color: #3D3D3D;
+$bg-color: #6D6D6D;
+body {
+  color: $color;
+  background-color: $bg-color;
+}
+p {color: $color;}
+h2 {background-color: $bg-color;}

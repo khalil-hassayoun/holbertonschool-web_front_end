@@ -1,0 +1,11 @@
+/* extended */
+%e {font-size: 12px;}
+.info { @extend %e;}
+.success {
+  @extend %e;
+  color: #00FF00;
+}
+.warning {
+  @extend %e;
+  color: #FF0000;
+}
