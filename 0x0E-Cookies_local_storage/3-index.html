@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scookiesle=1.0">
+ <title>Document</title>
+ <script>
+  function setCookies() {
+   let firstname = document.getElementById("firstname").value;
+   let email = document.getElementById("email").value;
+   document.cookie = `firstname=${firstname.value}`;
+   document.cookie = `email=${email.value}`;
+   let date = new Date();
+   date.setTime(date.getTime() + (864000 * 1000));
+   document.cookie = "expires = " + date.toUTCString();
+
+
+  };
+  function showCookies() {
+   let p = document.createElement("p");
+   p.innerHTML = `Email: ${getCookie("email")} - Firstname: ${getCookie("firstname")}`; 
+   document.body.appendChild(p);
+  };
+  function getCookie(name) {
+    let cookiename = `${name}=`;
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookies = decodedCookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+     cookies[i] = cookies[i].trimStart();
+     if (cookies[i].indexOf(name) == 0) {
+      return cookies[i];
+     }
+    }
+    return "";
+  }
+  function showForm() {
+    let wlcm = document.getElementById("welcome");
+    let form = document.getElementById("form");
+    wlcm.remove();
+    form.style.display = "block";
+  }
+  function hideForm() {
+    let form = document.querySelector("form");
+    form.style.display = "none";
+  }
+  function deleteCookiesAndShowForm() {
+    Cookies.remove('firstname')
+    Cookies.remove('email');
+    Cookies.remove('expire');
+    showForm();
+  }
+  function showWelcomeMessageOrForm() {
+    let firstname = getCookie('firstname');
+    if (firstname == "") {
+      showForm();
+    } else {
+      let wrap = document.createElement('div');
+      wrap.setAttribute("id", "welcome");
+      let html = `<h1>Welcome ${firstname.split('=')[1]}<a style="font-weight: 400; font-style: itali
+        margin-left: 10px;" onclick="deleteCookiesAndShowForm()">(logout)</a></h1>`;
+        wrap.innerHTML = html;
+        hideForm();
+        document.body.append(wrap);
+      }
+    }
+ </script>
+</head>
+<body>
+  <div>
+ <h2>Login to the website</h2>
+ <input type="text" id="firstname" placeholder="firstname">
+ <input type="text" id="email" placeholder="email">
+ <button onclick="setCookies()">Log me in</button>
+</div>
+</body>
+</html>
